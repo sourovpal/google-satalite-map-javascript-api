@@ -1,0 +1,65 @@
+<html>
+    <style>
+        #map {
+            height: 100%;
+          }
+          /* Optional: Makes the sample page fill the window. */
+          html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+          }
+    </style>
+<body onload = "initMap();">
+    <div id="map"></div>
+   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOe3gi8b8gaMCE6joZwwi02JisPbtBQHQ"
+    async defer></script>
+</body>
+</html>
+
+
+
+<!-- 23.83267897952681, 90.41675489677364 -->
+<!-- 47.277203783281585, 8.724952258941297 -->
+
+<script>
+    function initMap() {
+        var latlng = new google.maps.LatLng(47.277203783281585, 8.724952258941297);
+        console.log(latlng)
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom:18,
+            center: latlng, 
+            mapTypeControl: true,
+            streetViewControl: true,
+            fullscreenControl: true,
+            zoomControl: true,
+            zoomControlOptions: {
+                position: google.maps.ControlPosition.TOP_LEFT
+            },
+            scrollwheel: false,
+            mapTypeId: google.maps.MapTypeId.HYBRID
+        });
+
+        var marker = new google.maps.Marker({
+
+            position: latlng,
+    
+            map: map,
+    
+            title: '', //The title on hover to display
+    
+            draggable: true //this makes it drag and drop
+    
+        });
+    
+        google.maps.event.addListener(marker, 'dragend', function(a) {
+    
+            console.log(a);
+    
+            document.getElementById('loc').value = a.latLng.lat().toFixed(4) + ', ' + a.latLng.lng().toFixed(4); //Place the value in input box
+    
+        });
+
+
+    }
+</script>
